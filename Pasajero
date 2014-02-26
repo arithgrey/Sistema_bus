@@ -1,0 +1,39 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda
+	Mail: arithgrey@gmail.com
+	Twitter:  @arithgrey
+	facebook: /arithgrey
+*
+*/
+
+
+package SisBus;
+public class Pasajero {
+
+	private String nombre;  			/*Atributos del pasajero*/
+	private boolean descuento;
+	private int numeroAsiento;
+
+	public Pasajero() {
+	}
+	public Pasajero(String nombre, boolean descuento, int numeroAsiento) {
+	
+		this.nombre=nombre;
+		this.descuento=descuento;
+		this.numeroAsiento=numeroAsiento;
+	}
+	public String getNombre() {  /*Opten nombre en una cadena  */
+		return nombre;
+	}public void setNombre(String nombre) { /*Edita el nombre */
+		this.nombre = nombre;
+	}public boolean isDescuento() {  /*Dime si tiene descuento en verdadero o falso*/
+		return descuento;
+	}public void setDescuento(boolean descuento) {  /*Edita el estado de su descuento */
+		this.descuento = descuento;
+	}
+	public int getNumeroAsiento() {   /*Regresa el número de asiento en formato numérico */
+		return numeroAsiento;
+	}public void setNumeroAsiento(int numeroAsiento) { /*Edita el número de asiento */
+		this.numeroAsiento = numeroAsiento;
+	}
+}
