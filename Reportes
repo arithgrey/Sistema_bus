@@ -1,0 +1,43 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda
+	Mail: arithgrey@gmail.com
+	Twitter:  @arithgrey
+	facebook: /arithgrey
+*
+*/
+
+package SisBus;
+public class Reportes {
+	/*Clase encargada de entregar reportes respecto a ciertas acciones */
+
+	public String ReporteValorpasajero(){
+		
+		return "Ingrese el valor del pasaje" +
+				"\ndel destino al que va el " +
+				"\ncliente, tome en cuenta" +
+				"\nque el valor de los viajes " +
+				"\nSon mayores o iguales a 500" +
+				"\ny menores a 1000";
+	}
+	public String RepAgregar(){
+		
+		return "\n" +
+				"\n" +
+				"\nElija si su pasajero " +
+				"\ntiene descuento" +
+				"\ne" +
+				"\nIngrese el nombre " +
+				"\nde su pasajero" +
+				"\nasí como su número" +
+				"\nde asiento";
+	}
+	public String RepPrograma(){
+		return "Desarrollador: Medrano salazar Jonathan Govinda" +
+				"\nUNAM" +
+				"\nFES ARAGON " +
+				"\nE-MAIL: arithgrey@gmail.com" +
+				"\nINGENIERIA EN COMPUTACION" +								
+				"\nLENGUAJE DE PROGRAMACION:JAVA" +
+				"\nCOMPILADOR: ECLIPSE";
+	}
+}
