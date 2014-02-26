@@ -1,0 +1,380 @@
+/*
+	Desarrollador : Medrano Salazar Jonathan Govinda
+	Mail: arithgrey@gmail.com
+	Twitter:  @arithgrey
+	facebook: /arithgrey
+*
+*/
+
+package SisBus; 
+import javax.swing.*;
+
+import java.awt.*;  /*Librerías Gráficas de Java */
+import java.awt.event.*;
+
+public class supBus extends JFrame{
+
+		/*Iniciamos nuestros objetos gráficos  de manera  global*/
+	
+	private final JTextField campo, campoN, campoAsiento, cBorrar;
+	private JScrollPane barra, barra2;
+	private JTextArea area, area2, area3,a4;
+	private JButton botonS, bValorp, BPasajero, BGanancias, BVender,BDatos, Blista, BBor, BBorrar;
+	private JLabel l1, l2, ln, lA, lDisp, lB;
+	private Bus mibus;
+	private Reportes rep;
+	private JComboBox com;
+	private DefaultComboBoxModel descuento;
+	
+	public supBus() {
+
+		JDesktopPane principal=new JDesktopPane(); /*Panel contenedor*/
+		super.setTitle("Sistema de Buses Java (Medrano Salazar Jonathan Govinda)"); /*Titulo en el frame */
+		mibus=new Bus(); /*Creamos un objeto Bus*/
+		rep=new Reportes(); /*Creamos un objeto para los reportes */
+		
+		descuento=new DefaultComboBoxModel(new String []{"CON DESCUENTO","SIN DESCUENTO"}); /*Damos valores por default  al comboBox*/
+		com=new JComboBox(descuento);
+		com.setVisible(false);
+		
+		campo=new JTextField();
+		campo.setVisible(false);
+													/*Creamos objetos gráficos */					
+		campoAsiento=new JTextField();
+		campoAsiento.setVisible(false);
+		cBorrar=new JTextField();
+		
+		
+		area=new JTextArea();
+		area2=new JTextArea();
+		area2.setEditable(false);
+		area3=new JTextArea();
+		area3.setEditable(false);
+		
+		ln=new JLabel("Nombre cliente:");
+		lA=new JLabel("Asiento deseado:");
+		ln.setVisible(false);
+		lA.setVisible(false);
+		
+		a4=new JTextArea();
+		a4.setEditable(false);
+		
+		barra=new JScrollPane(area2);
+		barra2=new JScrollPane(a4);
+		BBor=new JButton("Borrar");
+		BBorrar=new JButton("Borrar lista completa");
+		BBorrar.setVisible(false);
+		
+		
+		l1=new JLabel("UNIVERSIDAD NACIONAL AUTONOMA DE MEXICO");
+		l2=new JLabel();
+		lB=new JLabel("Ingrese el número de asiento a borrar");
+		
+		lDisp=new JLabel("Barra de disponibilidad"); /*Barra de estado */
+		area.setEditable(false);
+		
+		botonS=new JButton("Salir");
+		bValorp=new JButton("Editar valor del pasaje");
+		BPasajero=new JButton("Vender asiento");
+		BGanancias=new JButton("Ver ganancias");
+		BVender=new JButton("Vender");
+		BVender.setVisible(false);
+		BDatos=new JButton("Datos programa");
+		Blista=new JButton("Lista de Pasajeros");
+		lB.setVisible(false);
+		campoN=new JTextField();
+		campoN.setVisible(false);
+		cBorrar.setVisible(false);
+		
+
+		/*Insertamos en el contenedor principal nuestros elementos gráficos swing */
+		principal.add(lDisp);
+		principal.add(com);
+		principal.add(campo);
+		principal.add(barra);
+		principal.add(botonS);
+		principal.add(bValorp);
+		principal.add(BPasajero);
+		principal.add(BGanancias);
+		principal.add(area);
+		principal.add(l1);
+		principal.add(campoN);
+		principal.add(BVender);
+		principal.add(campoAsiento);
+		principal.add(l2);
+		principal.add(BDatos);
+		principal.add(area3);
+		principal.add(ln);
+		principal.add(lA);
+		principal.add(Blista);
+		principal.add(barra2);
+		principal.add(BBor);
+		principal.add(cBorrar);
+		principal.add(lB);
+		principal.add(BBorrar);
+		
+		/*Asignamos posiciones a nuestros componentes gráficos*/
+
+		bValorp.setBounds(10, 50, 180, 20);
+		campo.setBounds(370, 20, 100, 20);
+		area.setBounds(490, 20, 190, 200);
+		l1.setBounds(10,10, 350, 20);
+		BPasajero.setBounds(10, 82, 180, 20);
+		BGanancias.setBounds(10, 115, 180, 20);
+		botonS.setBounds(570, 340, 110, 20);
+		campoN.setBounds(340,75 , 140, 20);
+		BVender.setBounds(400,183 , 90, 20);
+		com.setBounds(330, 110, 150, 20);
+		campoAsiento.setBounds(400,150, 80, 20);
+		barra.setBounds(25,280, 650, 50);
+		l2.setBounds(24, 220, 200, 100);
+		BDatos.setBounds(10, 215, 180, 20);
+		area3.setBounds(200, 50, 350, 200);
+		ln.setBounds(226, 75, 150, 20);
+		lA.setBounds(270, 150, 150, 20);
+		lDisp.setBounds(450, 260, 250, 20);
+		Blista.setBounds(10, 146, 180, 20);
+		barra2.setBounds(200, 50, 290, 200);
+		BBor.setBounds(10,180 , 180,20 );
+		cBorrar.setBounds(220, 80, 120, 20);
+		lB.setBounds(220, 60, 300, 20);
+		BBorrar.setBounds(280, 160, 190, 20);
+		
+		/*Damos acciones a nuestro botón Bganancias */
+
+		BGanancias.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+				lB.setVisible(false);
+				cBorrar.setVisible(false);
+				BBorrar.setVisible(false);
+			}
+		});
+		
+		/*Damos acciones a nuestro botón salir*/
+		botonS.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			
+				System.exit(0);
+		
+			}
+		});
+		
+		
+		/*Asignamos una acción a nuestro botón bvalor*/
+		bValorp.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evento){
+			
+				area.setText(rep.ReporteValorpasajero());
+				campo.setVisible(true);
+				BVender.setVisible(false);
+				campoN.setVisible(false);		
+				com.setVisible(false);
+				campoAsiento.setVisible(false);
+				BBorrar.setVisible(false);
+				area3.setVisible(false);
+				ln.setVisible(false);
+				lA.setVisible(false);
+				barra2.setVisible(false);
+				cBorrar.setVisible(false);
+				lB.setVisible(false);
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+				
+			}				
+		});
+		
+		/*Asignamos una acción a nuestro botón BDatos*/
+		BDatos.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ev){
+				cBorrar.setVisible(false);
+				area3.setVisible(true);
+				area3.setText(rep.RepPrograma());
+				BBorrar.setVisible(false);
+				lB.setVisible(false);
+				barra2.setVisible(true);
+				BVender.setVisible(false);
+				campoN.setVisible(false);		
+				campo.setVisible(false);
+				com.setVisible(false);
+				campoAsiento.setVisible(false);
+				area.setText("");
+				ln.setVisible(false);
+				lA.setVisible(false);
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+		
+			}
+		});
+		
+		
+		/*Asignamos una acción a nuestro campo*/
+
+		campo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evento){
+				area3.setVisible(false);
+				try{
+				String s=campo.getText();
+				int a=Integer.parseInt(s);
+				
+				if (a>=500 && a<=1000){
+					mibus.setValorPasaje(a);
+					JOptionPane.showMessageDialog(null, "Exito en edicion valor establecido en:"+a, 
+							"valor modificado correctamente", JOptionPane.INFORMATION_MESSAGE);
+					campo.setText("");
+				}else{
+					JOptionPane.showMessageDialog(null, "Su valor no se pudo modificar correctamente", 
+							"Ingrese un valor en los limites 500-1000", JOptionPane.INFORMATION_MESSAGE);
+						campo.setText("");	
+				}
+					
+			}catch(NumberFormatException e){
+				JOptionPane.showMessageDialog(null, "error al ingresar valor su valor:" +
+						"" + campo.getText(),"no es un valor numerico",JOptionPane.ERROR_MESSAGE);
+				campo.setText("");
+			}
+				}
+		});
+
+		/*Asignamos una acción a nuestro botón bPasajero*/
+		
+		BPasajero.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ev){
+				BVender.setVisible(true);
+				BBorrar.setVisible(false);
+				area3.setVisible(false);
+				campoN.setVisible(true);
+				lB.setVisible(false);
+				campo.setVisible(false);
+				com.setVisible(true);
+				campoAsiento.setVisible(true);
+				ln.setVisible(true);
+				lA.setVisible(true);
+				barra2.setVisible(false);
+				cBorrar.setVisible(false);
+				area.setText(rep.RepAgregar());
+				area2.setText(" "+mibus.VerSiponibilidad());
+			}
+		});
+		
+		/*Asignamos una acción a nuestro botón bVender*/
+
+		BVender.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+				BBorrar.setVisible(false);
+				area3.setVisible(false);
+
+				String nom=campoN.getText();
+				int a=0;		
+				
+				if (descuento.getSelectedItem().equals("CON DESCUENTO")){
+					a=1;
+				}else{
+					a=0;
+				}
+				
+				String nA=campoAsiento.getText();
+				int NAAA=Integer.parseInt(nA);
+		
+				JOptionPane.showMessageDialog(null,mibus.VenderAsiento(nom, a, NAAA));
+				area2.setText(" "+mibus.VerSiponibilidad());
+				campoN.setText("");
+				campoAsiento.setText("");
+				
+			}
+			
+		});
+		
+		/*Asignamos una acción a nuestro botón bBor*/
+		BBor.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				lB.setVisible(true);
+				barra2.setVisible(false);
+				BVender.setVisible(false);
+				area3.setVisible(false);
+				campoN.setVisible(false);		
+				campo.setVisible(false);
+				com.setVisible(false);
+				campoAsiento.setVisible(false);
+				area.setText("");
+				ln.setVisible(false);
+				lA.setVisible(false);
+				cBorrar.setVisible(true);
+				BBorrar.setVisible(true);
+			}
+		});
+
+
+		/*Asignamos una acción a nuestro botón Blistar*/
+
+		Blista.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent avento){
+		
+				barra2.setVisible(true);
+				a4.setText(mibus.getListaPasajeros());
+				BVender.setVisible(false);
+				area3.setVisible(false);
+				campoN.setVisible(false);		
+				campo.setVisible(false);
+				com.setVisible(false);
+				campoAsiento.setVisible(false);
+				lB.setVisible(false);
+				area.setText("");
+				ln.setVisible(false);
+				lA.setVisible(false);
+				cBorrar.setVisible(false);
+				BBorrar.setVisible(false);
+				
+			}
+		});
+		
+		/*Asignamos una acción a nuestro botón bBorrar*/
+
+		BBorrar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				JOptionPane.showMessageDialog(null, mibus.borrarListaCompleta());
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+				area2.setText(" "+mibus.VerSiponibilidad());
+				
+			}
+		});
+		
+		/*Asignamos una acción a nuestro cBorrar*/
+		cBorrar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent d){
+		
+								
+				try{
+				String E=cBorrar.getText();
+				int N=Integer.parseInt(E);
+				
+				JOptionPane.showMessageDialog(null, mibus.borrarPasajero(N));
+				cBorrar.setText("");
+				l2.setText("Ganancias actuales: "+mibus.getGanancia());
+				area2.setText(" "+mibus.VerSiponibilidad());
+				
+				}catch(NumberFormatException b){
+					JOptionPane.showMessageDialog(null, "fallo en valor","ingresar valor numerico", 
+							JOptionPane.ERROR_MESSAGE);
+					cBorrar.setText("");
+					l2.setText("Ganancias actuales: "+mibus.getGanancia());
+					area2.setText(" "+mibus.VerSiponibilidad());
+						
+				}
+			}
+		});
+		
+		this.add(principal, BorderLayout.CENTER); 
+		this.setVisible(true); /*Hacemos visible el frame*/
+		this.setSize(700, 400); /*Damos un valor al frame */
+		this.setLocationRelativeTo(null);		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); /*Al terminar operaciones eliminar todos los elementos gráficos de ejecución*/
+	}
+	public static void main(String[] args) {
+		
+		/*Creamos un objeto de nuestra aplicación gráfica */
+		supBus appBus=new supBus();
+	}
+
+}
